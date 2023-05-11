@@ -1,17 +1,17 @@
-import { SecretController } from './secret.controller';
-import { SecretService } from './secret.service';
+import { FilesController } from './files.controller';
+import { FilesService } from './files.service';
 
-describe('SecretController_class', () => {
+describe('filesController_class', () => {
   // Tests that findAll() returns data from httpService.
   it('test_find_all_returns_data', async () => {
     const mockData = { data: 'mock data' };
     const mockHttpService = {
       axiosRef: { get: jest.fn().mockResolvedValue(mockData) },
     };
-    const secretService = new SecretService(mockHttpService as any);
-    const secretController = new SecretController(secretService);
+    const filesService = new FilesService(mockHttpService as any);
+    const filesController = new FilesController(filesService);
 
-    const result = await secretController.findAll();
+    const result = await filesController.findAll();
 
     expect(result).toEqual(mockData.data);
   });
@@ -23,10 +23,10 @@ describe('SecretController_class', () => {
     const mockHttpService = {
       axiosRef: { get: jest.fn().mockResolvedValue(mockData) },
     };
-    const secretService = new SecretService(mockHttpService as any);
-    const secretController = new SecretController(secretService);
+    const filesService = new FilesService(mockHttpService as any);
+    const filesController = new FilesController(filesService);
 
-    const result = await secretController.findByName('mockFileName');
+    const result = await filesController.findByName('mockFileName');
 
     expect(result).toEqual(mockJsonData);
   });
@@ -37,10 +37,10 @@ describe('SecretController_class', () => {
     const mockHttpService = {
       axiosRef: { get: jest.fn().mockRejectedValue(mockError) },
     };
-    const secretService = new SecretService(mockHttpService as any);
-    const secretController = new SecretController(secretService);
+    const filesService = new FilesService(mockHttpService as any);
+    const filesController = new FilesController(filesService);
 
-    await expect(secretController.findAll()).rejects.toThrow(mockError);
+    await expect(filesController.findAll()).rejects.toThrow(mockError);
   });
 
   // Tests that findByName() throws an error.
@@ -49,10 +49,10 @@ describe('SecretController_class', () => {
     const mockHttpService = {
       axiosRef: { get: jest.fn().mockRejectedValue(mockError) },
     };
-    const secretService = new SecretService(mockHttpService as any);
-    const secretController = new SecretController(secretService);
+    const filesService = new FilesService(mockHttpService as any);
+    const filesController = new FilesController(filesService);
 
-    await expect(secretController.findByName('mockFileName')).rejects.toThrow(
+    await expect(filesController.findByName('mockFileName')).rejects.toThrow(
       mockError,
     );
   });

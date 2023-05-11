@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import csvToJson from '../utils/csvToJson';
 
 @Injectable()
-export class SecretService {
+export class FilesService {
   constructor(private readonly httpService: HttpService) {}
 
   async findAll() {

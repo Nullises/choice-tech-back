@@ -1,6 +1,6 @@
-import { SecretService } from './secret.service';
+import { FilesService } from './files.service';
 
-describe('SecretService_class', () => {
+describe('filesService_class', () => {
   // Tests that the findAll method returns response data.
   it('test_find_all_returns_response_data', async () => {
     // Arrange
@@ -9,10 +9,10 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: 'response data' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    const result = await secretService.findAll();
+    const result = await filesService.findAll();
 
     // Assert
     expect(result).toEqual('response data');
@@ -26,10 +26,10 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: 'csv data' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    const result = await secretService.findByName('file.csv');
+    const result = await filesService.findByName('file.csv');
 
     // Assert
     expect(result).toEqual({
@@ -46,10 +46,10 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: '' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    const result = await secretService.findAll();
+    const result = await filesService.findAll();
 
     // Assert
     expect(result).toEqual('');
@@ -63,10 +63,10 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: '' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    const result = await secretService.findByName('file.csv');
+    const result = await filesService.findByName('file.csv');
 
     // Assert
     expect(result).toEqual({
@@ -83,17 +83,17 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: '' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    await secretService.findAll();
+    await filesService.findAll();
 
     // Assert
     expect(httpService.axiosRef.get).toHaveBeenCalledWith(
-      'https://echo-serv.tbxnet.com/v1/secret/files',
+      'https://echo-serv.tbxnet.com/v1/Files/files',
       {
         headers: {
-          Authorization: 'Bearer aSuperSecretKey',
+          Authorization: 'Bearer aSuperFilesKey',
         },
       },
     );
@@ -107,17 +107,17 @@ describe('SecretService_class', () => {
         get: jest.fn().mockResolvedValue({ data: '' }),
       },
     };
-    const secretService = new SecretService(httpService as any);
+    const filesService = new FilesService(httpService as any);
 
     // Act
-    await secretService.findByName('file.csv');
+    await filesService.findByName('file.csv');
 
     // Assert
     expect(httpService.axiosRef.get).toHaveBeenCalledWith(
-      'https://echo-serv.tbxnet.com/v1/secret/file/file.csv',
+      'https://echo-serv.tbxnet.com/v1/Files/file/file.csv',
       {
         headers: {
-          Authorization: 'Bearer aSuperSecretKey',
+          Authorization: 'Bearer aSuperFilesKey',
         },
       },
     );
